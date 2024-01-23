@@ -1,0 +1,213 @@
+﻿@model IEnumerable<ModelLibrary.Movie>
+<link rel="stylesheet" href="Index.cshtml.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Movie Viewer</h1>
+
+
+
+
+<div class="clearfix search-container">
+
+    <div class="search-wrap">
+        <div class="search-form">
+            <h2>Search for Movies (uses fuzzy searching)</h2>
+            <form action="Index" method="post">
+                <label for="searchString">Search String</label>
+                <input type="text" id="searchString" name="searchString" value="" placeholder="Your Search String..." />
+
+                <label for="pageSize">Items Per Page:</label>
+                <select name="pageSize" id="pageSize">
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                <label for="sortOrder">Sort Order</label>
+                <select name="sortOrder" id="sortOrder">
+                    <option value="title_asc">Title Ascending</option>
+                    <option value="title_desc">Title Descending</option>
+                    <option value="date_asc">Release Date Ascending</option>
+                    <option value="date_desc">Release Date Descending</option>
+                </select>
+                <input type="hidden" name="page" value="1" />
+                <input type="submit" value="Submit">
+            </form>
+            <div>
+                <form action="Index" method="post">
+                    <input type="hidden" name="searchString" value="@ViewBag.SearchTerm" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page-1" />
+                    <input type="submit" value="Previous Page">
+                </form>
+
+            </div>
+            <div>
+                <form action="Index" method="post">
+                    <input type="hidden" name="searchString" value="@ViewBag.SearchTerm" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page" />
+                    <input type="submit" value="Next Page">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="search-wrap">
+        <div class="search-form">
+            <h2>Search for an Actors Movies (uses fuzzy searching)</h2>
+            <form action="SearchActors" method="post">
+                <label for="searchString">Search String</label>
+                <input type="text" id="searchString" name="searchString" value="" placeholder="Your Search String..." />
+
+                <label for="pageSize">Items Per Page:</label>
+                <select name="pageSize" id="pageSize">
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                <label for="sortOrder">Sort Order</label>
+                <select name="sortOrder" id="sortOrder">
+                    <option value="title_asc">Title Ascending</option>
+                    <option value="title_desc">Title Descending</option>
+                    <option value="date_asc">Release Date Ascending</option>
+                    <option value="date_desc">Release Date Descending</option>
+                </select>
+                <input type="hidden" name="page" value="1" />
+                <input type="submit" value="Submit">
+            </form>
+            <div>
+                <form action="SearchActors" method="post">
+                    <input type="hidden" name="searchString" value="@ViewBag.SearchTerm" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page-1" />
+                    <input type="submit" value="Previous Page">
+                </form>
+
+            </div>
+            <div>
+                <form action="SearchActors" method="post">
+                    <input type="hidden" name="searchString" value="@ViewBag.SearchTerm" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page" />
+                    <input type="submit" value="Next Page">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="search-wrap">
+        <div class="search-form search-genre">
+            <h2>Search by Genre</h2>
+            <form action="SearchGenre" method="post">
+                <label for="genre">Genre</label>
+                <select name="genre" id="genre">
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Aniplex">Aniplex</option>
+                    <option value="BROSTA TV">BROSTA TV</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Documentary">Documentary</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Family">Family</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Foreign">Foreign</option>
+                    <option value="GoHands">GoHands</option>
+                    <option value="History">History</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Music">Music</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Rogue State">Rogue State</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Sentai Filmworks">Sentai Filmworks</option>
+                    <option value="Telescene Film Group Productions">Telescene Film Group Productions</option>
+                    <option value="The Cartel">The Cartel</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="TV Movie">TV Movie</option>
+                    <option value="Vision View Entertainment">Vision View Entertainment</option>
+                    <option value="War">War</option>
+                    <option value="Western">Western</option>
+                </select>
+
+                <label for="pageSize">Items Per Page:</label>
+                <select name="pageSize" id="pageSize">
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                <label for="sortOrder">Sort Order</label>
+                <select name="sortOrder" id="sortOrder">
+                    <option value="title_asc">Title Ascending</option>
+                    <option value="title_desc">Title Descending</option>
+                    <option value="date_asc">Release Date Ascending</option>
+                    <option value="date_desc">Release Date Descending</option>
+                </select>
+                <input type="hidden" name="page" value="1" />
+                <input type="submit" value="Submit">
+            </form>
+            <div>
+                <form action="SearchGenre" method="post">
+                    <input type="hidden" name="genre" value="@ViewBag.Genre" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page-1" />
+                    <input type="submit" value="Previous Page">
+                </form>
+
+            </div>
+            <div>
+                <form action="SearchGenre" method="post">
+                    <input type="hidden" name="genre" value="@ViewBag.Genre" />
+                    <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+                    <input type="hidden" name="page" value="@ViewBag.Page" />
+                    <input type="submit" value="Next Page">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="clearfix container">
+    @foreach (var item in Model)
+    {
+        <div class="card-wrap">
+            <div class="card">
+                <img src="@item.Poster_Url" alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h3><b>@item.Title</b></h3>
+                    <h4>Staring - @item.LeadingActors</h4>
+                    <h4>{ @item.Genre }</h4>
+                    <p>
+                        @for (var i = 0; i < 10; i++)
+                        {
+                            @if (i < item.Vote_Average)
+                            {
+                                <span class="fa fa-star checked" title="Vote Average"></span>
+                            }
+                            else
+                            {
+                                <span class="fa fa-star" title="Vote Average"></span>
+
+                            }
+                        }
+                    </p>
+                    <p>@item.Overview</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,17 @@
+version: '2'
+services:
+
+  ### Mysql container
+  mysql:
+    container_name: my-movie-db
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movie_db
+      MYSQL_USER: webmovieuser
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_HOST: '%'  # needs to be enclosed with quotes
